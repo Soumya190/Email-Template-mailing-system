@@ -1,0 +1,19 @@
+.sidebarContainer{
+    font-family: 'Poppins', sans-serif;
+    width: 250px;
+    height: 100vh;
+    background-color: #2E6EA6;
+    padding: 20px;
+    box-sizing: border-box;
+    display: grid;
+    place-content: start;
+    align-items: center;
+    gap:1vw;
+
+    .sidebarItems{
+        height: 5vw;
+        width: 12vw;
+        background: #2F68AA;
+        color:white;
+    }
+}
