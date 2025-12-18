@@ -1,12 +1,12 @@
 "use client";
 import React,{useState} from 'react';
-import Styles from  '../../Styles/Dashboard/navbar.module.scss';
+import Styles from  '../../Styles/Emails/navbar.module.scss';
 
 const Navbar=()=>{
     return(
         <>
         <div className={Styles.navbarContainer}>
-            <h1>Dashboard</h1>
+            <h1>Email Templates</h1>
         </div>
         </>
     )

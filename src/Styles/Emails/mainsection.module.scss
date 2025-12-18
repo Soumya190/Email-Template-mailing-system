@@ -1,0 +1,29 @@
+.mainContent {
+    display: flex;
+    gap: 1vw;
+
+    .templateDetails{
+        height: 40vw;
+        width: 50%;
+        // width: 30vw;
+        background-color: #FFFFFF;
+        // background-color: red;
+    }
+
+    .emailtemplate {
+        height: 40vw;
+        width: 50%;
+        // width: 70vw;
+        background-color: #FFFFFF;
+        box-shadow: rgb(197, 196, 196) 0px 0px 10px;
+        border-radius: 0.5vw;
+        // background-color: blue;
+
+        h1{
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding-top: 1vw;
+            color:blue;
+        }
+    }
+}
