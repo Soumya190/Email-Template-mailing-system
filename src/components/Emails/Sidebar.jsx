@@ -6,16 +6,16 @@ const Sidebar = () => {
         <>
             <div className={Styles.sidebarContainer}>
                 <div className={Styles.sidebarItems}>
-                    <Link href="../../Dashboard"><p>Dashboard</p></Link>
+                    <Link href="../../Dashboard">Dashboard</Link>
                 </div>
                 <div className={Styles.sidebarItems}>
-                    <Link href="../../Templates"><p>Templates</p></Link>
+                    <Link href="../../Templates">Templates</Link>
                 </div >
                 <div className={Styles.sidebarItems}>
-                    <Link href="../../Contacts"><p>Contacts</p></Link>
+                    <Link href="../../Contacts">Contacts</Link>
                 </div>
                 <div className={Styles.sidebarItems}>
-                    <Link href="../../Emails"><p>Emails</p></Link>
+                    <Link href="../../Emails">Emails</Link>
                 </div>
             </div>
         </>

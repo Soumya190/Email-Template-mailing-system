@@ -2,7 +2,7 @@
     font-family: 'Poppins', sans-serif;
     width: 250px;
     height: 100vh;
-    background-color: #2E6EA6;
+    background-color: #203963;
     padding: 20px;
     box-sizing: border-box;
     display: grid;
@@ -11,9 +11,22 @@
     gap:1vw;
 
     .sidebarItems{
-        height: 5vw;
-        width: 12vw;
+        height: 3.1vw;
+        width: 13.5vw;
+        // padding-right: 9.5vw;
         background: #2F68AA;
-        color:white;
+        display: grid;
+        place-content: center;
+        align-items: center;
+        
+        a{
+            font-size: 1vw;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            line-height: 5vw;
+            color:rgb(209, 207, 207);
+            cursor: pointer;
+        }
     }
 }
