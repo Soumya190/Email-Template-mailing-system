@@ -1,16 +1,9 @@
-// import MainSection from '../../components/Dashboard/MainSection';
-// import React from 'react'
-// import Navbar from "@/components/Dashboard/Navbar"
-// import Styles from '@/Styles/Dashboard/navbar.module.scss'
+
+import MainSection from "../../components/Contacts/MainSection"
 
 const page = () => {
   return (
-    // <MainSection/>
-    <>
-    {/* <MainSection/> */}
-    hello
-    {/* <div className={Styles.navbar}>Dashboard Home Page</div> */}
-    </>
+    <MainSection/>
   )
 }
 
