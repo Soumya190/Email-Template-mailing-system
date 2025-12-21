@@ -1,5 +1,5 @@
 "use client"
-import Styles from "../../Styles/Emails/mainsection.module.scss";
+import Styles from "../../Styles/Templates/mainsection.module.scss";
 import { useState } from 'react';
 
 const MainSection = () => {
@@ -8,6 +8,30 @@ const MainSection = () => {
         subject: "",
         body: "",
     })
+    const [templates, setTemplates] = useState([]);
+    const [errors, setErrors] = useState({});
+
+
+    const validate = () => {
+        const newErrors = {};
+
+        if (!values.name.trim()) {
+            newErrors.name = "Template name is required";
+        }
+        if (!values.subject.trim()) {
+            newErrors.subject = "Email subject is required";
+        }
+        if (!values.body.trim()) {
+            newErrors.body = "Email body is required";
+        }
+
+        setErrors(newErrors);
+
+        // returns true if no errors
+        return Object.keys(newErrors).length === 0;
+    };
+
+
     // const [isButtonClicked,setIsButtonClicked]=useState(false);
     const [isEmailEmpty, setIsEmailEmpty] = useState(true);
 
@@ -38,6 +62,7 @@ const MainSection = () => {
 
     const handleCreateTemplate = async (e) => {
         e.preventDefault();
+        if (!validate()) return;
         const response = await fetch("/api/templates", {
             method: "POST",
             headers: {
@@ -47,8 +72,16 @@ const MainSection = () => {
         });
         const data = await response.json();
         console.log(data);
+        setTemplates((prev) => [...prev, data]);
+
+        setValues({
+            name: "",
+            subject: "",
+            body: "",
+        });
+        setErrors({});
+
         setIsEmailEmpty(false);
-        // setIsButtonClicked(true);
     }
 
     const handleUpdateTemplate = async (e) => {
@@ -64,14 +97,13 @@ const MainSection = () => {
         console.log(data);
     }
 
-    const handleDeleteTemplate = async (e) => {
-        e.preventDefault();
-        const response = await fetch(`/api/templates?id=${values.id}`, {
+    const handleDeleteTemplate = async (id) => {
+        await fetch(`/api/templates?id=${id}`, {
             method: "DELETE",
         });
-        const data = await response.json();
-        console.log(data);
-    }
+
+        setTemplates((prev) => prev.filter((t) => t.id !== id));
+    };
 
     const handleFetchTemplates = async (e) => {
         e.preventDefault();
@@ -85,49 +117,71 @@ const MainSection = () => {
     return (
         <>
             <div className={Styles.mainContent}>
-                <div className={Styles.templateDetails}>
-                    <div className={Styles.templateHeading}>
-                        <p>Template Name </p>
-                        <p>Subject</p>
-                        <p>Actions</p>
-                    </div>
-                    {
-                        isEmailEmpty ? 
-                        <p>Field is empty</p> : 
-                        <>
-                            <div className={Styles.templateContent}>
-                                <p>{values.name}</p>
-                                <p>{values.subject}</p>
-                                <p>{values.body}</p>
-                            </div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </>
-                    }
+                <div className={Styles.content1}>
+                    <table className={Styles.templateTable}>
+                    <thead className={Styles.templateHeading}>
+                        <tr>
+                            <th>Template Name</th>
+                            <th>Subject</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {templates.length === 0 ? (
+                            <tr>
+                                <td colSpan="3" className={Styles.emptyState}>
+                                    No templates created yet
+                                </td>
+                            </tr>
+                        ) : (
+                            templates.map((template) => (
+                                <tr key={template.id}>
+                                    <td>{template.name}</td>
+                                    <td>{template.subject}</td>
+                                    <td className={Styles.actions}>
+                                        <button
+                                            onClick={() => handleUpdateTemplate(template)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDeleteTemplate(template.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
                 </div>
+
                 <form onSubmit={handleFormSubmit} className={Styles.emailtemplate}>
                     <h1>Create/Edit Template</h1>
                     <div className={Styles.templateName}>
                         <label >Template Name:</label>
                         <input type="text" value={values.name} onChange={handleEmailName} placeholder='Welcome Email' />
+                        {errors.name && <span className={Styles.error}>{errors.name}</span>}
                     </div>
 
                     <div className={Styles.templateSubject}>
                         <label >Email Subject:</label>
                         <input type="text" value={values.subject} onChange={handleEmailSubject} placeholder='Enter the Subject' />
+                        {errors.subject && <span className={Styles.error}>{errors.subject}</span>}
                     </div>
 
                     <div className={Styles.templateBody}>
                         <label >Email Body:</label>
                         <textarea row='10' cols="30" value={values.body} onChange={handleEmailBody} placeholder='Enter the body' />
+                        {errors.body && <span className={Styles.error}>{errors.body}</span>}
                         {/* <input type="text" value={values.name} onChange={handleEmailBody} placeholder='Enter the body' /> */}
                     </div>
 
                     <button className={Styles.templateButton} onClick={handleCreateTemplate} type="button">Save Template</button>
 
-                    <button className={Styles.templateButton}>Send Email</button>
+                    {/* <button className={Styles.templateButton}>Send Email</button> */}
                 </form>
             </div></>
     )

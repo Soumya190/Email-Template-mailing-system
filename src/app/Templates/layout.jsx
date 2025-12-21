@@ -1,6 +1,6 @@
-import Navbar from "../../components/Dashboard/Navbar";
-import Sidebar from "../../components/Dashboard/Sidebar";
-import Styles from '../../Styles/Dashboard/layout.module.scss';
+import Navbar from "../../components/Templates/Navbar";
+import Sidebar from "../../components/Templates/Sidebar";
+import Styles from '../../Styles/Templates/layout.module.scss';
 
 export default function DashboardLayout({
   children,

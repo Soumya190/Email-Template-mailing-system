@@ -4,7 +4,7 @@ import { prisma } from "../../../lib/prisma";
 
 export async function GET() {
   try {
-    const contacts = await prisma.contact.findMany();
+    const contacts = await prisma.Contact.findMany();
     return NextResponse.json(contacts);
   } catch (error) {
     return NextResponse.json(
@@ -18,7 +18,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    const contact = await prisma.contact.create({
+    const contact = await prisma.Contact.create({
       data: {
         name: body.name,
         email: body.email,
@@ -37,6 +37,33 @@ export async function POST(req) {
 
     return NextResponse.json(
       { error: "Failed to create contact" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Contact ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await prisma.contact.delete({
+      where: {
+        id: String(id),
+      },
+    });
+
+    return NextResponse.json({ message: "Contact deleted successfully" });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete contact" },
       { status: 500 }
     );
   }

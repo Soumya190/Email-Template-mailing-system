@@ -12,6 +12,8 @@ const MainSection = () => {
         group: "",
     });
 
+    const [editingContactId, setEditingContactId] = useState(null);
+
     const [contacts, setContacts] = useState([]);
 
     const fetchContacts = async () => {
@@ -35,6 +37,30 @@ const MainSection = () => {
             [e.target.name]: e.target.value,
         });
     };
+
+    const handleEditContact = (contact) => {
+        setFormData({
+            name: contact.name,
+            email: contact.email,
+            group: contact.group || "",
+        });
+
+        setEditingContactId(contact.id);
+    };
+
+    const handleDeleteContact = async (id) => {
+        try {
+            await fetch(`/api/contact?id=${id}`, {
+                method: "DELETE",
+            });
+
+            setContacts((prev) => prev.filter((c) => c.id !== id));
+        } catch (error) {
+            console.error("Error deleting contact:", error);
+        }
+    };
+
+
 
     const handleCreateContact = async (e) => {
         e.preventDefault();
@@ -78,15 +104,7 @@ const MainSection = () => {
         <>
             <div className={Styles.mainsection}>
                 <div className={Styles.content1}>
-                    {/* <div className={Styles.contactheading}> */}
-                    <h1>Contact List</h1>
-                    {/* </div> */}
-                    {/* <div className={Styles.contactColumns}>
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Group</p>
-                        <p>Actions</p>
-                    </div> */}
+                    {/* <h1>Contact List</h1> */}
                     <table className={Styles.contactColumns}>
                         <thead className={Styles.contactHeading}>
                             <tr >
@@ -110,8 +128,12 @@ const MainSection = () => {
                                         <td>{contact.name}</td>
                                         <td>{contact.email}</td>
                                         <td>{contact.group || "-"}</td>
-                                        <td>
-                                            <button>
+                                        <td className={Styles.actions}>
+                                            <button onClick={() => handleEditContact(contact)}>
+                                                Edit
+                                            </button>
+                                            <button onClick={() => handleDeleteContact(contact.id)}
+                                            >
                                                 Delete
                                             </button>
                                         </td>
@@ -149,6 +171,7 @@ const MainSection = () => {
                             value={formData.group}
                             onChange={handleChange}
                         >
+                            <option value="">Select group</option>
                             <option value="marketing">Marketing</option>
                             <option value="clients">Clients</option>
                             <option value="students">Students</option>

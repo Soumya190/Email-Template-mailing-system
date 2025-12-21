@@ -3,43 +3,97 @@
     gap: 1vw;
     // width: 100%;
 
-    .templateDetails{
-        height: 40vw;
-        width: 60%;
-        display: grid;
-        gap:1vw;
-        place-content: start;
-        align-items: center;
-        // width: 30vw;
-        background-color: #faf9f9;
-        // background-color: red;
+    .content1 {
+        height: 35vw;
+        width: 55%;
+        padding-left: 3vw;
+        padding-top: 1vw;
+        display: flex;
+        align-items: flex-start;
 
-        .templateHeading{
+        .templateTable {
+            height: 30vw;
+            width: 40vw;
+            background-color: #ffffff;
+            border-radius: 0.6vw;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
             display: flex;
-            gap:8vw;
-            height: 3vw;
-            margin-left: 3vw;
-            justify-content: center;
-            align-items: center;
-            width: 35vw;
-            border-top-left-radius: 1vw;
-            border-top-right-radius:1vw;
-            background-color: #F2F2F2;
-        }
+            flex-direction: column;
 
-        .templateContent{
-            display: flex;
-            gap:2vw;
-            height: 3vw;
-            margin-left: 3vw;
-            justify-content: center;
-            align-items: center;
-            width: 35vw;
-            // border-top-left-radius: 1vw;
-            // border-top-right-radius:1vw;
-            background-color: white;
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.9vw;
+            }
+
+            thead {
+                background-color: #203963;
+            }
+
+            thead {
+                background-color: #203963;
+
+                tr {
+                    height: 3.2vw;
+                }
+
+                th {
+                    color: #ffffff;
+                    font-weight: 500;
+                    text-align: left;
+                    padding: 0 1.5vw;
+                }
+            }
+
+            tbody {
+                tr {
+                    height: 3vw;
+                    background-color: #ffffff;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: #f4f6fb;
+                    }
+                }
+
+                td {
+                    padding: 0 1.5vw;
+                    color: #314262;
+                    border-bottom: 1px solid #e8e8e8;
+                }
+
+                .actions {
+                    display: flex;
+                    gap: 0.8vw;
+
+                    button {
+                        padding: 0.4vw 0.9vw;
+                        font-size: 0.8vw;
+                        border-radius: 0.3vw;
+                        border: none;
+                        cursor: pointer;
+                    }
+
+                    button:first-child {
+                        background-color: #e0e7ff;
+                        color: #1e3a8a;
+                    }
+
+                    button:last-child {
+                        background-color: #fee2e2;
+                        color: #991b1b;
+                    }
+                }
+
+
+                tr:last-child td {
+                    border-bottom: none;
+                }
+            }
         }
     }
+
 
     .emailtemplate {
         height: 40vw;
@@ -51,29 +105,33 @@
         padding: 2vw;
         // background-color: blue;
 
-        h1{
+        h1 {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             padding-top: 1vw;
-            color:#314262;
+            color: #314262;
             font-size: 1.8vw;
             border-bottom: 0.1vw solid #E8E8E8;
         }
 
-        .templateName{
+        .templateName {
             display: flex;
             flex-direction: column;
             margin-top: 2vw;
 
-            label{
+            label {
                 font-family: 'Poppins', sans-serif;
                 margin-bottom: 0.5vw;
                 font-size: 1vw;
-                color:#314262;
+                color: #314262;
                 font-weight: 600;
             }
 
-            input{
+            .error {
+                color: red;
+            }
+
+            input {
                 height: 2vw;
                 border-radius: 0.3vw;
                 border: 0.1vw solid #CCCCCC;
@@ -82,20 +140,24 @@
             }
         }
 
-        .templateSubject{
+        .templateSubject {
             display: flex;
             flex-direction: column;
             margin-top: 2vw;
 
-            label{
+            label {
                 font-family: 'Poppins', sans-serif;
                 margin-bottom: 0.5vw;
                 font-size: 1vw;
-                color:#314262;
+                color: #314262;
                 font-weight: 600;
             }
 
-            input{
+            .error {
+                color: red;
+            }
+
+            input {
                 height: 2vw;
                 border-radius: 0.3vw;
                 border: 0.1vw solid #CCCCCC;
@@ -104,22 +166,26 @@
             }
         }
 
-        .templateBody{
+        .templateBody {
             display: flex;
             flex-direction: column;
             margin-top: 2vw;
 
-            label{
+            label {
                 font-family: 'Poppins', sans-serif;
                 margin-bottom: 0.5vw;
                 font-size: 1vw;
-                color:#314262;
+                color: #314262;
                 font-weight: 600;
             }
 
-            .textarea{
-                padding: 2vw;
-                // height: 5vw;
+            .error {
+                color: red;
+            }
+
+            textarea {
+                padding: 0.5vw;
+                height: 10vw;
             }
 
             // input{
@@ -131,7 +197,7 @@
             // }
         }
 
-        .templateButton{
+        .templateButton {
             margin-top: 3vw;
             width: 100%;
             height: 3vw;

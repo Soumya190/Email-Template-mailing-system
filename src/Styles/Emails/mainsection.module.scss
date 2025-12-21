@@ -1,147 +1,47 @@
-// .mainContent {
-//     display: flex;
-//     gap: 1vw;
-//     // width: 100%;
+.mainSection{
+    display: grid;
+    padding: 3vw;
+    gap:2vw;
 
-//     .templateDetails{
-//         height: 40vw;
-//         width: 60%;
-//         display: grid;
-//         gap:1vw;
-//         place-content: start;
-//         align-items: center;
-//         // width: 30vw;
-//         background-color: #faf9f9;
-//         // background-color: red;
+    .template{
+        display: flex;
+        gap:1vw;
 
-//         .templateHeading{
-//             display: flex;
-//             gap:8vw;
-//             height: 3vw;
-//             margin-left: 3vw;
-//             justify-content: center;
-//             align-items: center;
-//             width: 35vw;
-//             border-top-left-radius: 1vw;
-//             border-top-right-radius:1vw;
-//             background-color: #F2F2F2;
-//         }
+        p{
+            font-size: 1.2vw;
+        }
 
-//         .templateContent{
-//             display: flex;
-//             gap:2vw;
-//             height: 3vw;
-//             margin-left: 3vw;
-//             justify-content: center;
-//             align-items: center;
-//             width: 35vw;
-//             // border-top-left-radius: 1vw;
-//             // border-top-right-radius:1vw;
-//             background-color: white;
-//         }
-//     }
+        select{
+            height: 3vw;
+            width: 20vw;
+        }
+    }
 
-//     .emailtemplate {
-//         height: 40vw;
-//         width: 40%;
-//         // width: 70vw;
-//         background-color: #FFFFFF;
-//         box-shadow: rgb(197, 196, 196) 0px 0px 10px;
-//         border-radius: 0.5vw;
-//         padding: 2vw;
-//         // background-color: blue;
+    .groups{
+        display: flex;
+        gap:1vw;
 
-//         h1{
-//             font-family: 'Poppins', sans-serif;
-//             text-align: center;
-//             padding-top: 1vw;
-//             color:#314262;
-//             font-size: 1.8vw;
-//             border-bottom: 0.1vw solid #E8E8E8;
-//         }
+        p{
+            font-size: 1.2vw;
+        }
 
-//         .templateName{
-//             display: flex;
-//             flex-direction: column;
-//             margin-top: 2vw;
+        select{
+            height: 3vw;
+            width: 20vw;
+        }
+    }
 
-//             label{
-//                 font-family: 'Poppins', sans-serif;
-//                 margin-bottom: 0.5vw;
-//                 font-size: 1vw;
-//                 color:#314262;
-//                 font-weight: 600;
-//             }
+    .preview{
 
-//             input{
-//                 height: 2vw;
-//                 border-radius: 0.3vw;
-//                 border: 0.1vw solid #CCCCCC;
-//                 padding: 1.3vw 0.9vw;
-//                 font-size: 1vw;
-//             }
-//         }
+        p{
+            font-size: 1.2vw;
+        }
+    }
 
-//         .templateSubject{
-//             display: flex;
-//             flex-direction: column;
-//             margin-top: 2vw;
-
-//             label{
-//                 font-family: 'Poppins', sans-serif;
-//                 margin-bottom: 0.5vw;
-//                 font-size: 1vw;
-//                 color:#314262;
-//                 font-weight: 600;
-//             }
-
-//             input{
-//                 height: 2vw;
-//                 border-radius: 0.3vw;
-//                 border: 0.1vw solid #CCCCCC;
-//                 padding: 1.3vw 0.9vw;
-//                 font-size: 1vw;
-//             }
-//         }
-
-//         .templateBody{
-//             display: flex;
-//             flex-direction: column;
-//             margin-top: 2vw;
-
-//             label{
-//                 font-family: 'Poppins', sans-serif;
-//                 margin-bottom: 0.5vw;
-//                 font-size: 1vw;
-//                 color:#314262;
-//                 font-weight: 600;
-//             }
-
-//             .textarea{
-//                 padding: 2vw;
-//                 // height: 5vw;
-//             }
-
-//             // input{
-//             //     height: 2vw;
-//             //     border-radius: 0.3vw;
-//             //     border: 0.1vw solid #CCCCCC;
-//             //     padding: 1.3vw 0.9vw;
-//             //     font-size: 1vw;
-//             // }
-//         }
-
-//         .templateButton{
-//             margin-top: 3vw;
-//             width: 100%;
-//             height: 3vw;
-//             background-color: #203963;
-//             color: #FFFFFF;
-//             font-family: 'Poppins', sans-serif;
-//             font-size: 1.2vw;
-//             border: none;
-//             border-radius: 0.3vw;
-//             cursor: pointer;
-//         }
-//     }
-// }
+    button{
+        height: 3vw;
+        width: 7vw;
+        background-color: blue;
+        color:white;
+    }
+}

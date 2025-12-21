@@ -15,7 +15,7 @@ const Sidebar = () => {
                     <Link href="../../Contacts">Contacts</Link>
                 </div>
                 <div className={Styles.sidebarItems}>
-                    <Link href="../../Emails">Emails</Link>
+                    <Link href="../../Emails">Send Email</Link>
                 </div>
             </div>
         </>

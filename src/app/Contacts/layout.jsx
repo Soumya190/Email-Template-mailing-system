@@ -7,19 +7,13 @@ export default function DashboardLayout({
 }) {
   return (
     <main>
-        {/* <div> */}
-            <div className={Styles.DashboardLayout}>
-                {/* <div> */}
-                    <Sidebar />
-                {/* </div> */}
-                <div className={Styles.mainContent}>
-                    {/* <div className={Styles.navbarContainer}> */}
-                        <Navbar />
-                    {/* </div> */}
-                    {children}
-                </div>
-            </div>
-        {/* </div> */}
+      <div className={Styles.DashboardLayout}>
+          <Sidebar />
+        <div className={Styles.mainContent}>
+            <Navbar />
+          {children}
+        </div>
+      </div>
     </main>
   );
 }
