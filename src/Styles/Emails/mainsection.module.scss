@@ -1,47 +1,116 @@
-.mainSection{
+.mainSection {
     display: grid;
     padding: 3vw;
-    gap:2vw;
+    gap: 2vw;
 
-    .template{
+    .template {
         display: flex;
-        gap:1vw;
+        gap: 1vw;
 
-        p{
+        p {
             font-size: 1.2vw;
+            color: #203963;
         }
 
-        select{
+        select {
             height: 3vw;
-            width: 20vw;
+            width: 80%;
+            background-color: white;
+            border-radius: 0.2vw;
+            border-color: rgb(178, 179, 180);
         }
     }
 
-    .groups{
+    .groups {
         display: flex;
-        gap:1vw;
+        gap: 1vw;
 
-        p{
+        p {
             font-size: 1.2vw;
+            color: #203963;
         }
 
-        select{
+        select {
             height: 3vw;
-            width: 20vw;
+            width: 80%;
+            background-color: white;
+            border-radius: 0.2vw;
+            border-color: rgb(178, 179, 180);
         }
     }
 
-    .preview{
+    .previewContainer {
+        margin-top: 2vw;
+        display: grid;
+        place-content: center;
+        align-content: center;
+        margin-left: 15vw;
+        margin-right: 15vw;
+        height: 20vw;
+        background: #fafafa;
 
-        p{
-            font-size: 1.2vw;
+        .previewTitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            background-color: #203963;
+            padding-left: 2vw;
+            padding-top: 1vw;
+            height: 3vw;
+            border-top-left-radius: 0.3vw;
+            border-top-right-radius: 0.3vw;
+            color:white;
         }
     }
 
-    button{
+    .preview {
+        border-radius: 8px;
+        padding: 16px;
+        width: 40vw;
+        min-height: 150px;
+    }
+
+    .previewSubject {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .previewBody {
+        white-space: pre-wrap;
+        color: #333;
+    }
+
+    .previewPlaceholder {
+        color: #999;
+        text-align: center;
+    }
+
+
+    button {
         height: 3vw;
-        width: 7vw;
-        background-color: blue;
-        color:white;
+        padding: 0 1.5vw;
+
+        background: linear-gradient(135deg, #203963, #2c4f87);
+        color: #ffffff;
+
+        border: none;
+        border-radius: 0.5vw;
+        font-size: 1vw;
+        font-weight: 600;
+        cursor: pointer;
+
+        box-shadow: 0 6px 15px rgba(32, 57, 99, 0.35);
+        transition: all 0.25s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(32, 57, 99, 0.45);
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(32, 57, 99, 0.3);
+        }
     }
+
 }

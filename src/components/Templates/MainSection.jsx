@@ -10,6 +10,7 @@ const MainSection = () => {
     })
     const [templates, setTemplates] = useState([]);
     const [errors, setErrors] = useState({});
+    const [editingTemplateId, setEditingTemplateId] = useState(null);
 
 
     const validate = () => {
@@ -27,12 +28,10 @@ const MainSection = () => {
 
         setErrors(newErrors);
 
-        // returns true if no errors
         return Object.keys(newErrors).length === 0;
     };
 
 
-    // const [isButtonClicked,setIsButtonClicked]=useState(false);
     const [isEmailEmpty, setIsEmailEmpty] = useState(true);
 
     const handleEmailName = (e) => {
@@ -49,7 +48,7 @@ const MainSection = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("/api/send-email", {
+        const response = await fetch("/api/templates", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -61,40 +60,66 @@ const MainSection = () => {
     }
 
     const handleCreateTemplate = async (e) => {
-        e.preventDefault();
-        if (!validate()) return;
-        const response = await fetch("/api/templates", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-        });
-        const data = await response.json();
-        console.log(data);
-        setTemplates((prev) => [...prev, data]);
+    e.preventDefault();
+    if (!validate()) return;
 
-        setValues({
-            name: "",
-            subject: "",
-            body: "",
-        });
-        setErrors({});
+    const response = await fetch("/api/templates", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+    });
 
-        setIsEmailEmpty(false);
+    const data = await response.json();
+
+    if (!response.ok) {
+        alert(data.error);
+        return; 
     }
 
-    const handleUpdateTemplate = async (e) => {
-        e.preventDefault();
+    setTemplates((prev) => [...prev, data]);
+
+    setValues({
+        name: "",
+        subject: "",
+        body: "",
+    });
+    setErrors({});
+    setIsEmailEmpty(false);
+};
+
+
+    const handleEditClick = (template) => {
+        setValues({
+            name: template.name,
+            subject: template.subject,
+            body: template.body,
+        });
+        setEditingTemplateId(template.id);
+    };
+
+
+    const handleUpdateTemplate = async () => {
+        if (!validate()) return;
         const response = await fetch("/api/templates", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(values),
+            body: JSON.stringify({
+            id: editingTemplateId,
+            ...values
+        }),
         });
         const data = await response.json();
-        console.log(data);
+        console.log("Updated template:", data);
+        setTemplates(prev =>
+        prev.map(t => t.id === editingTemplateId ? data : t)
+    );
+
+        setValues({ name: "", subject: "", body: "" });
+        setEditingTemplateId(null);
     }
 
     const handleDeleteTemplate = async (id) => {
@@ -105,83 +130,77 @@ const MainSection = () => {
         setTemplates((prev) => prev.filter((t) => t.id !== id));
     };
 
-    const handleFetchTemplates = async (e) => {
-        e.preventDefault();
-        const response = await fetch("/api/templates", {
-            method: "GET",
-        });
-        const data = await response.json();
-        console.log(data);
-    }
-
     return (
         <>
             <div className={Styles.mainContent}>
                 <div className={Styles.content1}>
                     <table className={Styles.templateTable}>
-                    <thead className={Styles.templateHeading}>
-                        <tr>
-                            <th>Template Name</th>
-                            <th>Subject</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {templates.length === 0 ? (
+                        <thead className={Styles.templateHeading}>
                             <tr>
-                                <td colSpan="3" className={Styles.emptyState}>
-                                    No templates created yet
-                                </td>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Actions</th>
                             </tr>
-                        ) : (
-                            templates.map((template) => (
-                                <tr key={template.id}>
-                                    <td>{template.name}</td>
-                                    <td>{template.subject}</td>
-                                    <td className={Styles.actions}>
-                                        <button
-                                            onClick={() => handleUpdateTemplate(template)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            onClick={() => handleDeleteTemplate(template.id)}
-                                        >
-                                            Delete
-                                        </button>
+                        </thead>
+
+                        <tbody>
+                            {templates.length === 0 ? (
+                                <tr>
+                                    <td colSpan="3" className={Styles.emptyState}>
+                                        No templates created yet
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                            ) : (
+                                templates.map((template) => (
+                                    <tr key={template.id}>
+                                        <td>{template.name}</td>
+                                        <td>{template.subject}</td>
+                                        <td className={Styles.actions}>
+                                            <button
+                                                onClick={() => handleEditClick(template)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteTemplate(template.id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
                 </div>
 
                 <form onSubmit={handleFormSubmit} className={Styles.emailtemplate}>
                     <h1>Create/Edit Template</h1>
                     <div className={Styles.templateName}>
-                        <label >Template Name:</label>
-                        <input type="text" value={values.name} onChange={handleEmailName} placeholder='Welcome Email' />
+                        <label >Name:</label>
+                        <input type="text" value={values.name} onChange={handleEmailName} placeholder='Enter Name' />
                         {errors.name && <span className={Styles.error}>{errors.name}</span>}
                     </div>
 
                     <div className={Styles.templateSubject}>
-                        <label >Email Subject:</label>
+                        <label >Subject:</label>
                         <input type="text" value={values.subject} onChange={handleEmailSubject} placeholder='Enter the Subject' />
                         {errors.subject && <span className={Styles.error}>{errors.subject}</span>}
                     </div>
 
                     <div className={Styles.templateBody}>
-                        <label >Email Body:</label>
+                        <label >Body:</label>
                         <textarea row='10' cols="30" value={values.body} onChange={handleEmailBody} placeholder='Enter the body' />
                         {errors.body && <span className={Styles.error}>{errors.body}</span>}
-                        {/* <input type="text" value={values.name} onChange={handleEmailBody} placeholder='Enter the body' /> */}
                     </div>
 
-                    <button className={Styles.templateButton} onClick={handleCreateTemplate} type="button">Save Template</button>
-
-                    {/* <button className={Styles.templateButton}>Send Email</button> */}
+                    <button
+                        type="button"
+                        className={Styles.templateButton}
+                        onClick={editingTemplateId ? handleUpdateTemplate : handleCreateTemplate}
+                    >
+                        {editingTemplateId ? "Update Template" : "Save Template"}
+                    </button>
                 </form>
             </div></>
     )

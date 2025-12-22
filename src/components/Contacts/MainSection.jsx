@@ -2,8 +2,6 @@
 import Styles from "../../Styles/Contacts/mainsection.module.scss";
 import React, { useState, useEffect } from "react";
 
-
-
 const MainSection = () => {
 
     const [formData, setFormData] = useState({
@@ -11,6 +9,7 @@ const MainSection = () => {
         email: "",
         group: "",
     });
+    const [errors, setErrors] = useState({});
 
     const [editingContactId, setEditingContactId] = useState(null);
 
@@ -46,6 +45,7 @@ const MainSection = () => {
         });
 
         setEditingContactId(contact.id);
+        setErrors({});
     };
 
     const handleDeleteContact = async (id) => {
@@ -60,16 +60,21 @@ const MainSection = () => {
         }
     };
 
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = "Name is required";
+        if (!formData.email.trim()) newErrors.email = "Email is required";
+        if (!formData.group.trim()) newErrors.group = "Group is required";
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
 
 
     const handleCreateContact = async (e) => {
         e.preventDefault();
-
-        // if (!formData.name || !formData.email) {
-        //   alert("Name and Email are required");
-        //   return;
-        // }
-
+        if (!validate()) return;
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
@@ -92,6 +97,7 @@ const MainSection = () => {
                 group: "",
             });
 
+             setErrors({});
             fetchContacts();
 
         } catch (error) {
@@ -104,7 +110,6 @@ const MainSection = () => {
         <>
             <div className={Styles.mainsection}>
                 <div className={Styles.content1}>
-                    {/* <h1>Contact List</h1> */}
                     <table className={Styles.contactColumns}>
                         <thead className={Styles.contactHeading}>
                             <tr >
@@ -145,7 +150,7 @@ const MainSection = () => {
 
                 </div>
                 <div className={Styles.content2}>
-                    <h1>Add New Contact</h1>
+                    <h1>{editingContactId ? "Edit Contact" : "Add New Contact"}</h1>
                     <form onSubmit={handleCreateContact}>
                         <label>Name</label>
                         <input
@@ -155,6 +160,7 @@ const MainSection = () => {
                             value={formData.name}
                             onChange={handleChange}
                         />
+                        {errors.name && <span className={Styles.error}>{errors.name}</span>}
 
                         <label>Email</label>
                         <input
@@ -164,6 +170,7 @@ const MainSection = () => {
                             value={formData.email}
                             onChange={handleChange}
                         />
+                        {errors.email && <span className={Styles.error}>{errors.email}</span>}
 
                         <label>Group</label>
                         <select
@@ -178,8 +185,9 @@ const MainSection = () => {
                             <option value="hr">HR</option>
                             <option value="newsletter">Newsletter</option>
                         </select>
+                         {errors.group && <span className={Styles.error}>{errors.group}</span>}
 
-                        <button type="submit">Add Contact</button>
+                        <button type="submit">{editingContactId ? "Update Contact" : "Add Contact"}</button>
                     </form>
                 </div>
             </div>

@@ -9,7 +9,6 @@
         justify-content: space-evenly;
         font-family: "poppins";
         padding: 2vw;
-        // background-color: #203963;
 
         .template {
             height: 8vw;
@@ -21,7 +20,6 @@
             display: flex;
             padding: 2vw;
             gap: 1vw;
-            // margin: 0;
             padding: 2vw;
 
             .templateCount {
@@ -50,7 +48,6 @@
             display: flex;
             padding: 2vw;
             gap: 1vw;
-            // margin: 0;
             padding: 2vw;
 
             .contactCount {
@@ -79,7 +76,6 @@
             display: flex;
             padding: 2vw;
             gap: 1vw;
-            // margin: 0;
             padding: 2vw;
 
             .totalGroups {
@@ -103,58 +99,67 @@
         display: flex;
         gap: 3vw;
         padding: 3vw 7vw;
-        // background-color: pink;
+        flex-wrap: wrap; 
 
-        .templateButton {
+        a {
+            text-decoration: none;
+        }
+
+        .templateButton,
+        .contactButton,
+        .emailButton {
             height: 4vw;
             width: 20vw;
-            background-color: #3378b8;
-            box-shadow: rgb(197, 196, 196) 0px 0px 10px;
-            border-radius: 0.3vw;
-            text-align: center;
+            border-radius: 0.5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
 
             a {
-                text-decoration: none;
-                line-height: 4vw;
-                cursor: pointer;
-                color: white;
+                color: #fff;
+                font-size: 1.1vw;
+                line-height: normal;
+            }
+        }
+
+        .templateButton {
+            background-color: #3378b8;
+            color:white;
+
+            &:hover {
+                background-color: #2a6199;
             }
         }
 
         .contactButton {
-            height: 4vw;
-            width: 20vw;
             background-color: rgb(9, 132, 9);
-            box-shadow: rgb(197, 196, 196) 0px 0px 10px;
-            border-radius: 0.3vw;
-            text-align: center;
+            color:white;
 
-            a {
-                text-decoration: none;
-                line-height: 4vw;
-                cursor: pointer;
-                color: white;
+            &:hover {
+                background-color: rgb(7, 100, 7);
             }
         }
 
         .emailButton {
-            height: 4vw;
-            width: 20vw;
             background-color: rgba(88, 29, 107, 0.815);
-            box-shadow: rgb(197, 196, 196) 0px 0px 10px;
-            border-radius: 0.3vw;
-            text-align: center;
+            color:white;
 
-            a {
-                text-decoration: none;
-                line-height: 4vw;
-                cursor: pointer;
-                color: white;
+            &:hover {
+                background-color: rgba(70, 22, 85, 0.9);
             }
         }
     }
 
-    table {
+    .recentActivity {
         width: 90%;
         margin-left: 4vw;
         border-collapse: collapse;
@@ -165,85 +170,11 @@
         font-family: "Poppins", sans-serif;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 
-        p{
+        p {
             padding: 2vw;
             font-size: 1.2vw;
             font-weight: 600;
         }
-
-        thead {
-                background-color: white;
-
-                // tr {
-                //     height: 3.2vw;
-                // }
-
-                th {
-                    color: #203963;
-                    font-weight: 500;
-                    text-align: left;
-                    padding: 0 1.5vw;
-                }
-            }
-
-            tbody {
-                tr {
-                    height: 3vw;
-                    background-color: #ffffff;
-                    transition: background-color 0.2s ease;
-
-                    &:hover {
-                        background-color: #f4f6fb;
-                    }
-
-                    .actions {
-                        display: flex;
-                        gap: 1vw;
-                    }
-                }
-
-                td {
-                    padding: 0 1.5vw;
-                    color: #314262;
-                    border-bottom: 1px solid #e8e8e8;
-                }
-
-                tr:last-child td {
-                    border-bottom: none;
-                }
-
-                .actions {
-                    display: flex;
-                    gap: 0.8vw;
-
-                    button {
-                        padding: 0.4vw 0.9vw;
-                        font-size: 0.8vw;
-                        border-radius: 0.3vw;
-                        border: none;
-                        cursor: pointer;
-                    }
-
-                    button:first-child {
-                        background-color: #e0e7ff;
-                        color: #1e3a8a;
-                    }
-
-                    button:last-child {
-                        background-color: #fee2e2;
-                        color: #991b1b;
-                    }
-                }
-
-            }
     }
 
 }
-
-// font-size: 1vw;
-//             font-weight: 500;
-//             text-align: center;
-//             text-decoration: none;
-//             line-height: 5vw;
-//             color:rgb(209, 207, 207);
-//             cursor: pointer;

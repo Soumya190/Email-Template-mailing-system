@@ -5,18 +5,10 @@ const Sidebar = () => {
     return (
         <>
             <div className={Styles.sidebarContainer}>
-                <div className={Styles.sidebarItems}>
-                    <Link href="../../Dashboard">Dashboard</Link>
-                </div>
-                <div className={Styles.sidebarItems}>
-                    <Link href="../../Templates">Templates</Link>
-                </div >
-                <div className={Styles.sidebarItems}>
-                    <Link href="../../Contacts">Contacts</Link>
-                </div>
-                <div className={Styles.sidebarItems}>
-                    <Link href="../../Emails">Send Email</Link>
-                </div>
+                    <Link href="../../Dashboard" className={Styles.sidebarItems}><p>Dashboard</p></Link>
+                    <Link href="../../Templates" className={Styles.sidebarItems}><p>Templates</p></Link>
+                    <Link href="../../Contacts" className={Styles.sidebarItems}><p>Contacts</p></Link>
+                    <Link href="../../Emails" className={Styles.sidebarItems}><p>Send Email</p></Link>
             </div>
         </>
     )

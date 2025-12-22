@@ -1,29 +1,64 @@
-// import { NextResponse } from "next/server";
+import { prisma } from "../../../lib/prisma.config";
+import { NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 
-
-// const{SG_API_KEY, FROM_EMAIL, TO_EMAIL} = process.env;
-
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-console.log("API_KEY:", process.env.SENDGRID_API_KEY);
-console.log("FROM:", process.env.FROM_EMAIL);
-console.log("TO:", process.env.TO_EMAIL);
 
-export async function POST(request) {
-    try {
-        const { name, email, message } = await request.json();
+export async function POST(req) {
+  try {
+    const { templateId, group } = await req.json();
 
-        const msg = {
-            to: process.env.TO_EMAIL,
-            from: process.env.FROM_EMAIL,
-            subject: `New message from ${name}`,
-            // text: message,
-            html: `<p>You have a new message from ${name} (${email}):</p>`
-        }
-        await sgMail.send(msg);
-        return Response.json({success:true, status: "Email sent successfully" });
-    } catch (error) {
-        console.error("Error sending email:", error);
-        return Response.json({success:false, status:error.message,error:error.response?.body }, { status: 500 });
+    if (!templateId || !group) {
+      return NextResponse.json(
+        { error: "Template and group required" },
+        { status: 400 }
+      );
     }
+
+    const template = await prisma.emailTemplate.findUnique({
+      where: { id: templateId },
+    });
+
+    if (!template) {
+      return NextResponse.json(
+        { error: "Template not found" },
+        { status: 404 }
+      );
+    }
+
+    const contacts = await prisma.contact.findMany({
+      where: { group },
+      select: { email: true, name: true },
+    });
+
+    if (contacts.length === 0) {
+      return NextResponse.json(
+        { error: "No contacts in this group" },
+        { status: 404 }
+      );
+    }
+
+    const messages = contacts.map((c) => ({
+      to: c.email,
+      from: {
+        email: "soumyatiwari7866@gmail.com",
+        name: "Email API Integration & Template Management System",
+      },
+      subject: template.subject.replace("{{name}}", c.name),
+      text: template.body.replace(/<[^>]+>/g, ""),
+      html: template.body.replace("{{name}}", c.name),
+    }));
+
+    await sgMail.send(messages);
+    return NextResponse.json(
+      { message: "Emails sent successfully!" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Send email error:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to send emails" },
+      { status: 500 }
+    );
+  }
 }

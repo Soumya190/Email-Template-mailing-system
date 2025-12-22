@@ -4,117 +4,93 @@
     height: 100%;
     font-family: "poppins";
     padding: 1vw;
-    // margin-top: 1vw;
-    // background-color: pink;
 
     .content1 {
-        height: 35vw;
-        width: 55%;
-        padding-left: 3vw;
-        padding-top: 1vw;
-        display: flex;
-        align-items: flex-start;
+        padding: 2rem;
+        overflow-x: auto;
 
-        .contactColumns {
-            height: 30vw;
-            width: 45vw;
-            background-color: #ffffff;
-            border-radius: 0.6vw;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            display: flex;
-            font-size: 0.9vw;
-            flex-direction: column;
+        table.contactColumns {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            min-width: 600px; 
 
-            table {
-                width: 90%;
-                margin-left: 4vw;
-                border-collapse: collapse;
-                background-color: #ffffff;
-                border-radius: 0.6vw;
-                overflow: hidden;
-                height: 20vw;
-                font-family: "Poppins", sans-serif;
-                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-            }
-
-            thead {
+            thead.contactHeading {
                 background-color: #203963;
-
-                tr {
-                    height: 3.2vw;
-                }
+                color: white;
+                text-align: left;
 
                 th {
-                    color: #ffffff;
-                    font-weight: 500;
-                    text-align: left;
-                    padding: 0 1.5vw;
+                    padding: 0.8rem 1rem;
+                    font-weight: 600;
+                    font-size: 1rem;
                 }
             }
 
             tbody {
                 tr {
-                    height: 3vw;
-                    background-color: #ffffff;
-                    transition: background-color 0.2s ease;
+                    border-bottom: 1px solid #e0e0e0;
+                    transition: background-color 0.3s ease;
 
                     &:hover {
-                        background-color: #f4f6fb;
+                        background-color: #f1f5fb;
                     }
 
-                    .actions {
+                    td {
+                        padding: 0.8rem 1rem;
+                        font-size: 0.95rem;
+                        color: #203963;
+                    }
+
+                    td.actions {
                         display: flex;
-                        gap: 1vw;
+                        gap: 0.5rem;
+
+                        button {
+                            padding: 0.4rem 0.8rem;
+                            border: none;
+                            border-radius: 0.3rem;
+                            cursor: pointer;
+                            font-weight: 500;
+                            font-size: 0.9rem;
+                            transition: all 0.2s ease;
+
+                            &:first-child {
+                                background-color: #314262;
+                                color: white;
+
+                                &:hover {
+                                    background-color: #2b3f65;
+                                }
+                            }
+
+                            &:last-child {
+                                background-color: #f44336;
+                                color: white;
+
+                                &:hover {
+                                    background-color: #d32f2f;
+                                }
+                            }
+                        }
                     }
                 }
-
-                td {
-                    padding: 0 1.5vw;
-                    color: #314262;
-                    border-bottom: 1px solid #e8e8e8;
-                }
-
-                tr:last-child td {
-                    border-bottom: none;
-                }
-
-                .actions {
-                    display: flex;
-                    gap: 0.8vw;
-
-                    button {
-                        padding: 0.4vw 0.9vw;
-                        font-size: 0.8vw;
-                        border-radius: 0.3vw;
-                        border: none;
-                        cursor: pointer;
-                    }
-
-                    button:first-child {
-                        background-color: #e0e7ff;
-                        color: #1e3a8a;
-                    }
-
-                    button:last-child {
-                        background-color: #fee2e2;
-                        color: #991b1b;
-                    }
-                }
-
             }
         }
-
     }
+
 
     .content2 {
         width: 40%;
         display: grid;
-        // place-content: center;
-        // align-items: center;
         padding: 2vw;
         height: 35vw;
         box-shadow: rgb(197, 196, 196) 0px 0px 10px;
+
+        .error{
+            color:red;
+            font-size: 0.9vw;
+        }
 
         h1 {
             font-family: 'Poppins', sans-serif;
