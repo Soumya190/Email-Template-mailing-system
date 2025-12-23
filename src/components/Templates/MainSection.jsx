@@ -8,6 +8,8 @@ const MainSection = () => {
         subject: "",
         body: "",
     })
+    
+    
     const [templates, setTemplates] = useState([]);
     const [errors, setErrors] = useState({});
     const [editingTemplateId, setEditingTemplateId] = useState(null);
