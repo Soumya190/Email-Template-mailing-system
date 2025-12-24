@@ -21,7 +21,7 @@ export async function POST(req) {
       data: {
         name: body.name,
         email: body.email,
-        group: body.group,
+        group:body.group?.toLowerCase(),
       },
     });
 

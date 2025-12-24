@@ -4,6 +4,15 @@ import React, { useState, useEffect } from "react";
 
 const MainSection = () => {
 
+    const GROUPS = [
+        "marketing",
+        "clients",
+        "students",
+        "hr",
+        "newsletter",
+    ];
+
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -97,7 +106,7 @@ const MainSection = () => {
                 group: "",
             });
 
-             setErrors({});
+            setErrors({});
             fetchContacts();
 
         } catch (error) {
@@ -173,19 +182,16 @@ const MainSection = () => {
                         {errors.email && <span className={Styles.error}>{errors.email}</span>}
 
                         <label>Group</label>
-                        <select
-                            name="group"
-                            value={formData.group}
-                            onChange={handleChange}
-                        >
+                        <select name="group" value={formData.group} onChange={handleChange}>
                             <option value="">Select group</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="clients">Clients</option>
-                            <option value="students">Students</option>
-                            <option value="hr">HR</option>
-                            <option value="newsletter">Newsletter</option>
+                            {GROUPS.map((g) => (
+                                <option key={g} value={g}>
+                                    {g.charAt(0).toUpperCase() + g.slice(1)}
+                                </option>
+                            ))}
                         </select>
-                         {errors.group && <span className={Styles.error}>{errors.group}</span>}
+
+                        {errors.group && <span className={Styles.error}>{errors.group}</span>}
 
                         <button type="submit">{editingContactId ? "Update Contact" : "Add Contact"}</button>
                     </form>

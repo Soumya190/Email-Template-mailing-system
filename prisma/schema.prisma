@@ -23,7 +23,7 @@ model Contact {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
-  group     String?
+  group     String
   createdAt DateTime @default(now())
 }
 

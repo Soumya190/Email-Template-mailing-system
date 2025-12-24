@@ -14,12 +14,12 @@ const MainSection = () => {
             .then(data => setTemplates(data));
     }, []);
 
+
     useEffect(() => {
         fetch("/api/groups")
             .then(res => res.json())
             .then(data => {
-                console.log("GROUPS API RESPONSE:", data);
-
+                console.log("Groups fetched:", data);
                 if (Array.isArray(data)) {
                     setGroups(data);
                 } else {
@@ -28,6 +28,8 @@ const MainSection = () => {
             })
             .catch(() => setGroups([]));
     }, []);
+
+
 
     const handleTemplateChange = (e) => {
         const template = templates.find(t => t.id === e.target.value);
@@ -43,9 +45,13 @@ const MainSection = () => {
         const response = await fetch("/api/send-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+            // body: JSON.stringify({
+            //     templateId: selectedTemplate.id,
+            //     group: selectedGroup,
+            // }),
+            body: JSON.stringify({         // ← replace this with the lowercased group
                 templateId: selectedTemplate.id,
-                group: selectedGroup,
+                group: selectedGroup.toLowerCase(),  // normalize group
             }),
         });
 

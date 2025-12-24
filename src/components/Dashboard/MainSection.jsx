@@ -20,16 +20,6 @@ const MainSection = () => {
             });
     }, []);
 
-    // useEffect(() => {
-    //     fetch("/api/activity")
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log("ACTIVITY API RESPONSE:", data);
-    //             setActivities(data);
-    //         });
-    // }, []);
-
-
     return (
         <>
             <div className={Styles.mainSection}>

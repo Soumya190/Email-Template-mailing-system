@@ -25,9 +25,12 @@ export async function POST(req) {
         { status: 404 }
       );
     }
-
     const contacts = await prisma.contact.findMany({
-      where: { group },
+      where: {
+        group: {
+          equals: group.toLowerCase(),
+        },
+      },
       select: { email: true, name: true },
     });
 
